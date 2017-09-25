@@ -13,7 +13,7 @@ nodemon
 # Create data/db folder inside your project directory and run following command
 "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath "your-data/db path"
 
-It automatically create database as per name we mentioned DBDemo.
+It will automatically create database as per name we mentioned DBDemo.
 
 # Call API via postman using route path
 
