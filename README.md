@@ -36,8 +36,11 @@ signin having email and password credentials and it will return the token.
 
 ## Usage
 function tokenForUser(user,_role) {
+
   const timestamp = new Date().getTime();
+
   return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
+  
 }
 
 This will create token for user. token encoded by header (algorithm and token type),payload (data) and signature. The signature part contains an encoded header, a payload, and a secret key phrase.
