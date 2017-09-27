@@ -24,11 +24,11 @@ nodemon
 ```bash
 "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath "your-data/db path"
 ```
-![](image\dbConn.PNG "Description goes here")
+![](image\\dbConn.PNG "Description goes here")
 
-![](image\dbstart.PNG "Description goes here")
+![](image\\dbstart.PNG "Description goes here")
 It will automatically create database as per name we mentioned DBDemo.
-![](image\DBdemo.PNG "Description goes here")
+![](image\\DBdemo.PNG "Description goes here")
 
 ## write config.json
 ```json
