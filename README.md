@@ -2,23 +2,15 @@
 React API server based on node.js, express.js, mongodb including json web token and passport.js authentication for user access and roles.
 
 # installation
-### install npm
+### install npm for install packages locally
 ```bash
-npm install
+//install npm and nodemon from your project directory path
+>npm install
+>nodemon
 ```
-
-### install nodemon using following command
-```bash
-npm install -g nodemon
-```
-
 nodemon will automatically restart our server application whenever a code change happens.
 
-# run server using nodemon from your project directory
-```bash
-nodemon
-```
-![](/nodemon.PNG)
+![](/image/nodemon.PNG "Description goes here")
 
 # create data/db folder inside your project directory and run following command
 ```bash
@@ -27,16 +19,23 @@ nodemon
 ![](/image/dbConn.PNG "Description goes here")
 
 ![](image/dbstart.PNG "Description goes here")
-It will automatically create database as per name we mentioned DBDemo.
-![](image\\DBdemo.PNG "Description goes here")
 
-## write config.json
+It will automatically create database as per name we mentioned DBDemo.You can check in Robo 3T.
+Robo 3T embeds the actual mongo shell in a tabbed interface with access to a shell command line as well as GUI interaction.
+
+![](image/robo.PNG "Description goes here")
+If you want to create new one then click on create otherwise just click on connect.
+
+![](image/DBdemo.PNG "Description goes here")
+
+##config.json
 ```json
 {
    "dbUri": "mongodb://localhost:27017/DBDemo",
     "secret": "a secret phrase!!"
 }
 ```
+"dbUri" contains "mongodb" who define that we are using mongodb for handling database, localhost:27017 for access MongoDB over HTTP on the native driver port and DBDemo is the name of database. You can also change the database name as per your requirement.
 # Directory structure
 ```bash
 react-api-server
@@ -56,23 +55,32 @@ react-api-server
 ```
 # call API via postman using route path
 
-"role" having name field who define the roles. We need to create role first.http://localhost:3090/api/v1/role
-![](image\roleApi.PNG "Description goes here")
-http://localhost:3090/api/v1/signup
+For signup we need to create role first."role" collection having name field who define the roles.we are using "admin" and "user" role here.
+```bash
+http://localhost:3090/api/v1/role
+![](image/roleApi.PNG "Description goes here")
+![](image/role.PNG "Description goes here")
+```
+Here we use /role route. This route defined in routes/roleRouter.js. As we can see /role route is used to access the API and requireAuth is used to access authorized API only. If you want to access some API without authentication then you can directly call that API. you can see the Authorized API call in userProfile section.
+![](image/route.PNG "Description goes here")
 
-"user" collection having email,password fields.For signup email,password and role are must.
-![](image\api1.PNG "Description goes here")
-![](image\user.PNG "Description goes here")
+```bash
+http://localhost:3090/api/v1/signup
+![](image/api1.PNG "Description goes here")
+```
+"user" collection having email,password fields.For signup email,password and role. You can see the collection created in robo 3T.
+![](image/user.PNG "Description goes here")
 
 "userRoles" contains userId,roleId. In that userId is reference of user-ObjectId and roleId is reference of role-ObjectId.
-![](image\userrole.PNG "Description goes here")
+![](image/userrole.PNG "Description goes here")
 
 # signin
 signin having email and password credentials and it will return the token.
-![](image\api2.PNG "Description goes here")
+![](image/api2.PNG "Description goes here")
 
 For other collections token authorization is must.
-"userProfile"-userId,description,Name,Phone. userId is the reference of
+"userProfile"-userId,description,Name,Phone. userId is the reference of user-ObjectId.
+
 
 # Usage
 ```bash
