@@ -2,11 +2,10 @@
 var mongoose = require('mongoose');
 
 var userProfileSchema = mongoose.Schema({
-  userId:Object,
-  Description:String,
-  Name:String,
-  Phone: String,
-
+    userId:Object,
+    description:String,
+    name:String,
+    phone:String
   });
 
 userProfileSchema.index(

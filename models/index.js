@@ -16,5 +16,6 @@ module.exports.connect = (uri) => {
 require('./roleModel');
 require('./userModel');
 require('./userRolesModel');
+require('./userProfileModel');
 
 };

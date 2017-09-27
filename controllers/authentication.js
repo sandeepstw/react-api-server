@@ -6,24 +6,31 @@ const config = require('../config/index.json');
 const assert=require('assert');
 
 function tokenForUser(user,_role) {
-   console.log(_role);
+
   const timestamp = new Date().getTime();
-  return jwt.encode({ sub: user.id, iat: timestamp,role:_role }, config.secret);
+     console.log( 'token role'+ _role);
+  return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
 }
 
-exports.signin = function(req, res, next) {
+exports.signin = function(req, res) {
   // User has already had their email and password auth'd
-  var userInRole='anonymous';
-  UserRole.findOne({userId:req.user._id})
-  .then((userrole)=>{
-    Role.findOne({_id:userrole.roleId})
-      .then((role)=>{
-        // We just need to give them a token
-        console.log("_role "+ role.name);
-        userInRole=role.name;
-  })
-})
-   res.json({ token: tokenForUser(req.user,userInRole) })
+  // console.log("hi ");
+
+    UserRole.findOne({userId:req.user._id})
+      .then((userrole)=>{
+        console.log("user id " + userrole.userId);
+        const roleid=userrole.roleId;
+          Role.findOne({_id:roleid})
+          .then((role)=>{
+            if(role!=null)
+            {
+              res.json({ token: tokenForUser(req.user, role.name)});
+            }
+            else {
+              res.json({ token: tokenForUser(req.user, '')});
+            }
+          })
+        })
 
 }
 
@@ -32,8 +39,6 @@ exports.signup = function(req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
   const newrole=req.body.role;
-  var userInRole='anonymous';
-
 
   if (!email || !password) {
     return res.status(422).send({ error: 'You must provide email and password'});
@@ -58,24 +63,26 @@ exports.signup = function(req, res, next) {
       if (err) { return next(err); }
     })
 .then((user)=>{
- //console.log('role id '+ newrole);
+
   // Find in Kb_Role document for posted role
   Role.findOne({name: newrole})
-     .then((role)=>{
-         console.log('role id '+ role);
-      const userrole = new UserRole({
-        userId: user._id,
-        roleId: role._id
-      });
+  .then((role)=>{
+          if(role!=null)
+          {
+            const userrole = new UserRole({
+              userId: user._id,
+              roleId: role._id
+            });
 
-       userrole.save()
-
-       })
-       userInRole=role.name;
-
+             userrole.save()
+               res.json({ token: tokenForUser(user, role.name)});
+          }
+          else {
+            res.json({ token: tokenForUser(user, '')});
+          }
+    })
      })
-      // Repond to request indicating the user was created
-      res.json({ token: tokenForUser(user, userInRole) });
+
 
   });
 }

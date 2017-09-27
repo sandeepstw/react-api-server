@@ -12,7 +12,6 @@ const requireAuth = passport.authenticate('jwt', { session: false });
          .get(requireAuth,userProfile.read)
          .put(requireAuth,userProfile.update)
          .delete(requireAuth,userProfile.delete);
-router.route('/searchUsers')
-      .post(requireAuth,userProfile.searchUsers);
+
 
 module.exports = router;

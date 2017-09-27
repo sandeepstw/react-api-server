@@ -18,7 +18,7 @@ nodemon will automatically restart our server application whenever a code change
 ```bash
 nodemon
 ```
-![welcome](./nodemon.PNG)
+![](/nodemon.PNG)
 
 # create data/db folder inside your project directory and run following command
 ```bash
@@ -37,7 +37,23 @@ It will automatically create database as per name we mentioned DBDemo.
     "secret": "a secret phrase!!"
 }
 ```
-
+# Directory structure
+```bash
+react-api-server
+          |-- data
+          |     |--db
+          |--react-api-server
+          |     |--config
+          |     |--controllers
+          |     |--models
+          |     |--routes
+          |     |--image
+          |     |--services
+          |     |--.gitignore
+          |     |--index.js
+          |     |--package.json
+          |     |--README.md
+```
 # call API via postman using route path
 
 "role" having name field who define the roles. We need to create role first.http://localhost:3090/api/v1/role
