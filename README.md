@@ -58,19 +58,34 @@ react-api-server
 
 For signup we need to create role first."role" collection having name field who define the roles.we are using "admin" and "user" role here.
 ```bash
-http://localhost:3090/api/v1/role
+1 http://localhost:3090/api/v1/role
 ```
 ![](image/roleApi.PNG "Description goes here")
 
-Here we use /role route. This route defined in routes/roleRouter.js. As we can see /role route is used to access the API and requireAuth is used to access authorized API only. If you want to access some API without authentication then you can directly call that API. you can see the Authorized API call in userProfile section.
+Here we use /role route. This route defined in routes/roleRouter.js. As we can see /role route is used to access the API and requireAuth is used to access authorized API only. If you want to access some API without authentication then you can directly call that API. You can see the Authorized API call in userProfile section.
+```bash
+var express = require('express');
+var router = express.Router();
+const passportService = require('../services/passport');
+const passport = require('passport');
+const requireAuth = passport.authenticate('jwt', { session: false });
 
-![](image/route.PNG "Description goes here")
+ var role = require('../controllers/rolesController.js');
+ router.route('/role')
+         .get(role.list)
+         .post(role.create);
+ router.route('role/:_id')
+         .get(requireAuth,role.read)
+         .put(requireAuth,role.update)
+         .delete(requireAuth,role.delete);
+module.exports = router;
+```
 
 ![](image/role.PNG "Description goes here")
 
 
 ```bash
-http://localhost:3090/api/v1/signup
+2 http://localhost:3090/api/v1/signup
 ```
 "user" collection having email,password fields.For signup email,password and role. You can see the collection created in robo 3T.
 ![](image/api1.PNG "Description goes here")
@@ -82,13 +97,17 @@ http://localhost:3090/api/v1/signup
 
 # signin
 signin having email and password credentials and it will return the token.
-
+```bash
+3 http://localhost:3090/api/v1/signin
+```
 ![](image/api2.PNG "Description goes here")
 
 For other collections token authorization is must.
 "userProfile" having userId,description,Name,Phone. userId is the reference of user-ObjectId.
 when we create userProfile we need to pass token as follow:-
-
+```bash
+4 http://localhost:3090/api/v1/userProfile
+```
 ![](image/auth.PNG "Description goes here")
 
 ![](image/userprofile.PNG "Description goes here")
@@ -97,6 +116,9 @@ when we create userProfile we need to pass token as follow:-
 
 # Usage
 In model we define schema and all schema registered into index.js
+```bash
+models/index.js
+```
 ```bash
 const mongoose = require('mongoose');
 module.exports.connect = (uri) => {
@@ -116,6 +138,9 @@ require('./userRolesModel');
 require('./userProfileModel');
 
 };
+```
+```bash
+model/userModel.js
 ```
 ```bash
 userSchema.pre('save', function saveHook(next) {
@@ -144,7 +169,7 @@ UserSchema.pre('save') that will be executed before saving. In this method, the 
 ```bash
 //overwrite plain text password with encrypted password
  user.password=hash;
- ```
+```
 
 This generation will be executed only if it’s a new document or the password field has been changed:
  user.isModified('password').
