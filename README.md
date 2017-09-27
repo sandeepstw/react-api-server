@@ -26,9 +26,6 @@ If you want to create new one then click on create otherwise just click on conne
 
 ![](image/robo.PNG "Description goes here")
 
-
-![](image/DBdemo.PNG "Description goes here")
-
 ## config.json
 ```json
 {
@@ -116,10 +113,10 @@ when we create userProfile we need to pass token as follow:-
 
 # Usage
 In model we define schema and all schema registered into index.js
+
 ```bash
 models/index.js
-```
-```bash
+
 const mongoose = require('mongoose');
 module.exports.connect = (uri) => {
   mongoose.connect(uri);
@@ -139,10 +136,10 @@ require('./userProfileModel');
 
 };
 ```
+
 ```bash
 model/userModel.js
-```
-```bash
+
 userSchema.pre('save', function saveHook(next) {
 
   // get access to the user model
