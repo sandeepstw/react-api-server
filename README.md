@@ -15,7 +15,7 @@ nodemon
 
 # create data/db folder inside your project directory and run following command
 "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath "your-data/db path"
-
+![start database](D:\Project\react-api-server\react-api-server\image.png "Description goes here")
 It will automatically create database as per name we mentioned DBDemo.
 
 # call API via postman using route path
@@ -34,13 +34,13 @@ After signup you can signin and get token. For other collections token authoriza
 # signin
 signin having email and password credentials and it will return the token.
 
-## Usage
+# Usage
 function tokenForUser(user,_role) {
 
-  const timestamp = new Date().getTime();
+      const timestamp = new Date().getTime();
 
-  return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
-  
+      return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
+
 }
 
 This will create token for user. token encoded by header (algorithm and token type),payload (data) and signature. The signature part contains an encoded header, a payload, and a secret key phrase.
