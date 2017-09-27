@@ -43,37 +43,28 @@ For other collections token authorization is must.
 "userProfile"-userId,description,Name,Phone. userId is the reference of
 
 # Usage
-
+```bash
 userSchema.pre('save', function saveHook(next) {
 
   // get access to the user model
-
   const user = this;
-
   // generate a salt then run callback
-
   bcrypt.genSalt(10, function(err, salt) {
-
-    if (err) { return next(err); }
-
+    if (err) {
+    return next(err);
+  }
         // hash (encrypt) our password using the salt
-
     bcrypt.hash(user.password, salt, null, function(err, hash) {
-
-        if (err) { return next(err); }
-
+        if (err) {
+        return next(err);
+      }
         // overwrite plain text password with encrypted password
-
       user.password = hash;
-
         next();
-
       });
-
   });
-
 });
-
+```
 
 UserSchema.pre('save') that will be executed before saving. In this method, the bcrypt module will generate a hash from a generated earlier salt string and a user’s password. This hash instead of a user’s password will be saved in the collection.
 
@@ -87,12 +78,13 @@ This generation will be executed only if it’s a new document or the password f
 
 The schema also contains a method UserSchema.methods.comparePassword that we will call if we want to check if a user has provided a correct password.
 
+```bash
 function tokenForUser(user,_role) {
 
       const timestamp = new Date().getTime();
 
       return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
-
 }
+```
 
 This will create token for user. token encoded by header (algorithm and token type),payload (data) and signature. The signature part contains an encoded header, a payload, and a secret key phrase.
