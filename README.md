@@ -18,7 +18,7 @@ nodemon will automatically restart our server application whenever a code change
 ```bash
 nodemon
 ```
-![welcome](./nodemon.PNG)
+![](/nodemon.PNG)
 
 # create data/db folder inside your project directory and run following command
 ```bash
