@@ -25,7 +25,6 @@ Robo 3T embeds the actual mongo shell in a tabbed interface with access to a she
 
 ![](image/robo.PNG "Description goes here")
 If you want to create new one then click on create otherwise just click on connect.
-
 ![](image/DBdemo.PNG "Description goes here")
 
 ##config.json
@@ -58,17 +57,17 @@ react-api-server
 For signup we need to create role first."role" collection having name field who define the roles.we are using "admin" and "user" role here.
 ```bash
 http://localhost:3090/api/v1/role
+```
 ![](image/roleApi.PNG "Description goes here")
 ![](image/role.PNG "Description goes here")
-```
 Here we use /role route. This route defined in routes/roleRouter.js. As we can see /role route is used to access the API and requireAuth is used to access authorized API only. If you want to access some API without authentication then you can directly call that API. you can see the Authorized API call in userProfile section.
 ![](image/route.PNG "Description goes here")
 
 ```bash
 http://localhost:3090/api/v1/signup
-![](image/api1.PNG "Description goes here")
 ```
 "user" collection having email,password fields.For signup email,password and role. You can see the collection created in robo 3T.
+![](image/api1.PNG "Description goes here")
 ![](image/user.PNG "Description goes here")
 
 "userRoles" contains userId,roleId. In that userId is reference of user-ObjectId and roleId is reference of role-ObjectId.
@@ -80,7 +79,10 @@ signin having email and password credentials and it will return the token.
 
 For other collections token authorization is must.
 "userProfile"-userId,description,Name,Phone. userId is the reference of user-ObjectId.
-
+when we create userProfile we need to pass token as follow:-
+![](image/auth.PNG "Description goes here")
+![](image/userprofile.PNG "Description goes here")
+![](image/userprofiledb.PNG "Description goes here")
 
 # Usage
 ```bash
