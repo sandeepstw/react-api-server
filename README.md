@@ -180,4 +180,4 @@ function tokenForUser(user,_role) {
       return jwt.encode({ sub: user.id, iat:timestamp,role:_role }, config.secret);
 }
 ```
-Access token contain user id and role, which you can change in tokenForUser function. In demo we are passing userid and role name with timestamp. To check information embeds in access token https://jwt.io/. In that you simply need to paste token in encoded area and it will display headed and payload data.
+Access token contain user id and role, which you can change in tokenForUser function. In demo we are passing userid and role name with timestamp. User https://jwt.io/ to check information embeds in access token.
